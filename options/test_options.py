@@ -10,7 +10,7 @@ class TestOptions(BaseOptions):
         self.parser.add_argument('--results_dir', type=str, default='./results/', help='saves results here.')
         self.parser.add_argument('--phase', type=str, default='test', help='train, val, test, etc')
         self.parser.add_argument('--which_epoch', type=str, default='latest', help='which epoch to load? set to latest to use latest cached model')
-        self.parser.add_argument('--how_many', type=int, default=50, help='how many test images to run')
+        self.parser.add_argument('--how_many', type=int, default=5, help='how many test images to run')
         self.parser.add_argument('--in_the_wild', action='store_true', help='for evaluating on in the wild images')
         self.parser.add_argument('--traverse', action='store_true', help='when true, run latent space traversal on a list of images')
         self.parser.add_argument('--full_progression', action='store_true', help='when true, deploy mode saves all outputs as a single image')
