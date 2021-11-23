@@ -39,8 +39,6 @@ class preprocessInTheWildImage():
         self.deeplab_input_size = 513
 
         # load deeplab model
-        assert torch.cuda.is_available()
-        torch.backends.cudnn.benchmark = True
         if not os.path.isfile(resnet_file_path):
             print('Cannot find DeeplabV3 backbone Resnet model.\n' \
                   'Please run download_models.py to download the model')
@@ -59,7 +57,7 @@ class preprocessInTheWildImage():
                   'Please run download_models.py to download the model')
             raise OSError
 
-        checkpoint = torch.load(model_fname)
+        checkpoint = torch.load(model_fname, map_location=torch.device('cpu'))
         state_dict = {k[7:]: v for k, v in checkpoint['state_dict'].items() if 'tracked' not in k}
         self.deeplab_model.load_state_dict(state_dict)
 
@@ -170,8 +168,6 @@ class preprocessInTheWildImage():
     def get_segmentation_maps(self, img):
         img = img.resize((self.deeplab_input_size,self.deeplab_input_size),Image.BILINEAR)
         img = self.deeplab_data_transform(img)
-        img = img.cuda()
-        self.deeplab_model.cuda()
         outputs = self.deeplab_model(img.unsqueeze(0))
         self.deeplab_model.cpu()
         _, pred = torch.max(outputs, 1)

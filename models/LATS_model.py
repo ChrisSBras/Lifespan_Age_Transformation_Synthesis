@@ -240,16 +240,16 @@ class LATS(BaseModel): #Lifetime Age Transformation Synthesis
             noise_sigma = 0.2
 
         for i in range(nb):
-            condG_A_gen[i, :] = (noise_sigma * torch.randn(1, self.cond_length)).cuda()
+            condG_A_gen[i, :] = (noise_sigma * torch.randn(1, self.cond_length))
             condG_A_gen[i, self.class_B[i]*self.duplicate:(self.class_B[i] + 1)*self.duplicate] += 1
             if not (self.traverse or self.deploy):
-                condG_B_gen[i, :] = (noise_sigma * torch.randn(1, self.cond_length)).cuda()
+                condG_B_gen[i, :] = (noise_sigma * torch.randn(1, self.cond_length))
                 condG_B_gen[i, self.class_A[i]*self.duplicate:(self.class_A[i] + 1)*self.duplicate] += 1
 
-                condG_A_orig[i, :] = (noise_sigma * torch.randn(1, self.cond_length)).cuda()
+                condG_A_orig[i, :] = (noise_sigma * torch.randn(1, self.cond_length))
                 condG_A_orig[i, self.class_A[i]*self.duplicate:(self.class_A[i] + 1)*self.duplicate] += 1
 
-                condG_B_orig[i, :] = (noise_sigma * torch.randn(1, self.cond_length)).cuda()
+                condG_B_orig[i, :] = (noise_sigma * torch.randn(1, self.cond_length))
                 condG_B_orig[i, self.class_B[i]*self.duplicate:(self.class_B[i] + 1)*self.duplicate] += 1
 
         if mode == 'train':

@@ -617,7 +617,7 @@ class StyledDecoder(nn.Module):
     def forward(self, id_features, target_age=None, traverse=False, deploy=False, interp_step=0.5):
         if target_age is not None:
             if traverse:
-                alphas = torch.arange(1,0,step=-interp_step).view(-1,1).cuda()
+                alphas = torch.arange(1,0,step=-interp_step).view(-1,1)
                 interps = len(alphas)
                 orig_class_num = target_age.shape[0]
                 output_classes = interps * (orig_class_num - 1) + 1
