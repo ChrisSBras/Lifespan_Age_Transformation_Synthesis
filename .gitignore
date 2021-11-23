@@ -7,3 +7,8 @@ build/
 evaluation/
 */__pycache__/*
 *.dat
+bin/
+*.cfg
+*.png
+lib/
+demo.py
